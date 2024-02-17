@@ -25,7 +25,7 @@ public class Student {
     @JsonIgnore
     private Sectional sectional;
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
-    @JsonIgnore
+    @JoinColumn(nullable = false, name = "identityCard_id", referencedColumnName = "id")
     private IdentityCard identityCard;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "subject")
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_students_to_Subject"))
