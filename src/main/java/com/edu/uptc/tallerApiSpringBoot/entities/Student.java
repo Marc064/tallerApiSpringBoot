@@ -9,27 +9,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="student")
+@Table(name="students")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 30, name = "fname")
     private String fistName;
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 30, name = "lname")
     private String lastName;
     @Column(nullable = false)
     private LocalDate birthday;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_students_to_sectional"))
     @JsonIgnore
     private Sectional sectional;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
-    @JoinColumn(nullable = false, name = "identityCard_id", referencedColumnName = "id")
-    private IdentityCard identityCard;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "subject")
-    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_students_to_Subject"))
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
+    private IdentityCard identityCard;
+    @ManyToMany
+    @JoinTable(
+            name="student-subject",
+            joinColumns = @JoinColumn(name="id-subject")
+    )
     private List<Subject> subjects;
 
 
