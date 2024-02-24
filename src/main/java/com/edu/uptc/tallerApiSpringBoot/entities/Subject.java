@@ -16,7 +16,7 @@ public class Subject {
     private String description;
     @Column(nullable = false)
     private short credits;
-    @ManyToMany(mappedBy = "subjects", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "subjects", cascade = CascadeType.DETACH)
     @JsonIgnore
     private List<Student> students;
 

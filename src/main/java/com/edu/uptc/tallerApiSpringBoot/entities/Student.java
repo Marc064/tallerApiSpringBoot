@@ -20,7 +20,7 @@ public class Student {
     private String lastName;
     @Column(nullable = false)
     private LocalDate birthday;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_students_to_sectional"))
     @JsonIgnore
     private Sectional sectional;
