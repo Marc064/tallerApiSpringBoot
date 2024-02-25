@@ -65,14 +65,17 @@ public class SubjectController {
         try{
             Subject subject = subjectService.findById(id);
             if(subject != null){
-
+                for(Student student : subject.getStudents()) {
+                    student.getSubjects().remove(subject);
+                }
                 subjectService.delete(subject);
                 return ResponseHandler.generateResponse("Success", HttpStatus.OK, subject);
-            }else{
+            } else {
                 return ResponseHandler.generateResponse("Subject not exist", HttpStatus.NOT_FOUND, null);
             }
-        }catch (Exception e){
-            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null );
+        } catch (Exception e){
+                return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
+
 }

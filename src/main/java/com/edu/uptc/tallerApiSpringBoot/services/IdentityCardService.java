@@ -29,6 +29,10 @@ public class IdentityCardService {
     }
 
     public void delete(IdentityCard identityCard){
+        Student student = identityCard.getStudent();
+        if(student.getIdentityCard() != null){
+            student.setIdentityCard(null);
+        }
         identityCardRepository.delete(identityCard);
     }
 
