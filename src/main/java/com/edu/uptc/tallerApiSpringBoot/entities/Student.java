@@ -30,7 +30,7 @@ public class Student {
     @ManyToMany
     @JoinTable(
             name="student-subject",
-            joinColumns = @JoinColumn(name="id-subject")
+            joinColumns = @JoinColumn(name="student_id")
     )
     private List<Subject> subjects;
 
